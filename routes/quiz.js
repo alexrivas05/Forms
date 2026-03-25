@@ -10,6 +10,13 @@ router.get("/", async (req, res)=>{
 });
 router.post("/", (req, res) =>{
     console.log(req.body);
+    let {userChoice, correctDef} = req.body;
+    if(userChoice === correctDef)
+    {
+        console.log("User guessed correctly!")
+        let score = totalCorrect+1;
+    }
+    let total = totalQuestions+1;
 
 });
 
