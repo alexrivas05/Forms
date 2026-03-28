@@ -4,16 +4,15 @@ const router = express.Router();
 router.route('/').get((req, res)=>{
     res.send('User List');
 }).post((req, res)=>{
-    const firstName = req.body.firstName;
-    const isValid = firstName !=="";
+    const { firstName, lastName, gender, age } = req.body;
+
+    const isValid = firstName !== "" && lastName !== "" && gender !== "" && age !== "";
+
     if(isValid){
-        console.log(`Adding user: ${firstName}`);
-        users.push({firstName});
-        res.render('users/list', {users});
-    }
-    else{
-        console.log("Error adding user!");
-        res.render("user/new", {firstName:firstName});
+        users.push({ firstName, lastName, gender, age });
+        res.render('users/list', { users });
+    } else {
+        res.render("users/new", { firstName, lastName, gender, age });
     }
 });
 
@@ -28,14 +27,16 @@ router.get('/new', (req, res)=>{ // /users/new
 router.route('/:id').get((req, res)=>{
     console.log(req.user);
     console.log('Getting user data!');
-res.send(`Getting User data for id: ${req.user['name']}`);
-}).delete((req, res)=>{
+res.render('users/show', { user: req.user });}).delete((req, res)=>{
 res.send(`Deleting User data for id: ${req.params.id}`);
 }).put((req, res)=>{
 res.send(`Updating User data for id: ${req.params.id}`);
 });
 
-const users = [{firstName:"Alex"}, {firstName:"George"}];
+const users = [
+  { firstName: "Alex", lastName: "Rivas", gender: "Male", age: 21 },
+  { firstName: "George", lastName: "Salayka", gender: "Male", age: 40 }
+];
 
 router.param("id", (req, res, next, id)=>{
     req.user = users[id];
