@@ -23,8 +23,11 @@
         <h2><span class="correct">Correct!</span></h2>
         <% } else { %>
             <h2><span class="incorrect">Incorrect!</span></h2>
+            <h3>The correct definition was: <%= correctDef %></h3>
+
         <% } %>
         <% } %>
+        
     
     <h2><%= correctWord %> - <%= correctPart %></h2>
     <form action="quiz" method="post">
