@@ -1,4 +1,5 @@
 const express = require('express');
+const { link } = require('fs');
 const router = express.Router();
 const {readFile} = require('fs').promises;
 
@@ -8,15 +9,18 @@ router.get("/", async (req, res)=>{
     res.render('quiz', {chosenWords});
 
 });
-router.post("/", (req, res) =>{
+router.post("/", async (req, res) =>{
     console.log(req.body);
-    let {userChoice, correctDef} = req.body;
+    let {userChoice, correctDef, totalQuestions, totalCorrect} = req.body;
+    totalCorrect = parseInt(totalCorrect);
+    totalQuestions = parseInt(totalQuestions) + 1;
     if(userChoice === correctDef)
-    {
-        console.log("User guessed correctly!")
-        let score = totalCorrect+1;
-    }
-    let total = totalQuestions+1;
+        {
+            console.log("User guessed correctly!")
+            totalCorrect = totalCorrect + 1;
+        }
+        let chosenWords = await getWords();
+        res.render('quiz', {chosenWords, totalQuestions, totalCorrect, userChoice, correctDef});
 });
 
 let getWords = async ()=>{
