@@ -17,13 +17,12 @@ router.post("/", (req, res) =>{
         let score = totalCorrect+1;
     }
     let total = totalQuestions+1;
-
 });
 
 let getWords = async ()=>{
     //console.log("Getting Random Part!");
     let randomPart = getRandomPart();
-    let allWords = await readFile('resource/allwords.txt', 'utf8');
+    let allWords = await readFile('resources/allwords.txt', 'utf8');
     let wordArray = allWords.split('\n');
     //console.log(wordArray);
     shuffle(wordArray);

@@ -5,8 +5,8 @@
 </head>
 <body>
     <% 
-        let questionCount = totalQuestions ?? 0;
-        let score = totalCorrect ?? 0;
+        let questionCount = locals.totalQuestions ?? 0;
+        let score = locals.totalCorrect ?? 0;
         let randomIndex = parseInt(Math.random()*chosenWords.length);
         let chosenWord = chosenWords [randomIndex];
         let[correctWord, correctPart, correctDef] = chosenWord.split('\t');

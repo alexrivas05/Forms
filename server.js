@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/users', userRouter);
-app.use('quiz', quizRouter);
+app.use('/quiz', quizRouter);
 
 app.get('/solution', (req, res) =>{
 let num1 = parseInt(req.query['num1']);
